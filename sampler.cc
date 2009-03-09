@@ -113,18 +113,18 @@ void LDASampler::GenerateTopicDistributionForWord(
 
 // Compute log P(d) = sum_w log P(w), where P(w) = sum_z P(w|z)P(z|d).
 double LDASampler::LogLikelihood(LDADocument* document) const {
-  const int num_topics(model_->num_topics());
+  const unsigned int num_topics(model_->num_topics());
 
   // Compute P(z|d) for the given document and all topics.
   const TopicCountDistribution& document_topic_cooccurrences(
       document->topic_distribution());
   CHECK_EQ(num_topics, document_topic_cooccurrences.size());
   int64 document_length = 0;
-  for (int t = 0; t < num_topics; ++t) {
+  for (unsigned int t = 0; t < num_topics; ++t) {
     document_length += document_topic_cooccurrences[t];
   }
   vector<double> prob_topic_given_document(num_topics);
-  for (int t = 0; t < num_topics; ++t) {
+  for (unsigned int t = 0; t < num_topics; ++t) {
     prob_topic_given_document[t] =
         (document_topic_cooccurrences[t] + alpha_) /
         (document_length + alpha_ * num_topics);
@@ -147,7 +147,7 @@ double LDASampler::LogLikelihood(LDADocument* document) const {
 
     // Comput P(w|z).
     vector<double> prob_word_given_topic(num_topics);
-    for (int t = 0; t < num_topics; ++t) {
+    for (unsigned int t = 0; t < num_topics; ++t) {
       prob_word_given_topic[t] =
           (word_topic_cooccurrences[t] + beta_) /
           (global_topic_occurrences[t] + model_->num_words() * beta_);
@@ -155,7 +155,7 @@ double LDASampler::LogLikelihood(LDADocument* document) const {
 
     // Compute P(w) = sum_z P(w|z)P(z|d)
     double prob_word = 0.0;
-    for (int t = 0; t < num_topics; ++t) {
+    for (unsigned int t = 0; t < num_topics; ++t) {
       prob_word += prob_word_given_topic[t] * prob_topic_given_document[t];
     }
 

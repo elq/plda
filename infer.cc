@@ -85,12 +85,12 @@ int main(int argc, char** argv) {
         if (iter >= flags.burn_in_iterations_) {
           const TopicCountDistribution& document_distribution =
               document.topic_distribution();
-          for (int i = 0; i < document_distribution.size(); ++i) {
+          for (unsigned int i = 0; i < document_distribution.size(); ++i) {
             prob_dist[i] += document_distribution[i];
           }
         }
       }
-      for (int topic = 0; topic < prob_dist.size(); ++topic) {
+      for (unsigned int topic = 0; topic < prob_dist.size(); ++topic) {
         out << prob_dist[topic] /
               (flags.total_iterations_ - flags.burn_in_iterations_)
             << ((topic < prob_dist.size() - 1) ? " " : "\n");

@@ -53,7 +53,7 @@ int LDADocument::WordOccurrenceIterator::Topic() {
 
 // Exchange the topic.  Be sure to keep the topic count distribution up to
 // date.
-void LDADocument::WordOccurrenceIterator::SetTopic(int new_topic) {
+void LDADocument::WordOccurrenceIterator::SetTopic(unsigned int new_topic) {
   CHECK(!Done());
   CHECK_LE(0, new_topic);
   CHECK_GT(parent_->topic_distribution_.size(), new_topic);
@@ -80,7 +80,7 @@ void LDADocument::WordOccurrenceIterator::SkipWordsWithoutOccurrences() {
 }
 
 void LDADocument::CountTopicDistribution() {
-  for (int i = 0; i < topic_distribution_.size(); ++i) {
+  for (unsigned int i = 0; i < topic_distribution_.size(); ++i) {
     topic_distribution_[i] = 0;
   }
   for (WordOccurrenceIterator iter(this); !iter.Done(); iter.Next()) {

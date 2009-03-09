@@ -46,7 +46,7 @@ class LDADocument {
     int Topic();
 
     // Changes the topic of the current occurrence.
-    void SetTopic(int new_topic);
+    void SetTopic(unsigned int new_topic);
 
     // Returns the word of the current occurrence.
     const string& Word();

@@ -206,7 +206,7 @@ int main(int argc, char** argv) {
     sorted_words.push_back(*iter);
   }
   sort(sorted_words.begin(), sorted_words.end());
-  for (int i = 0; i < sorted_words.size(); ++i) {
+  for (unsigned int i = 0; i < sorted_words.size(); ++i) {
     word_index_map[sorted_words[i]] = i;
   }
 

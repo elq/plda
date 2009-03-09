@@ -91,7 +91,7 @@ class LDAModel {
                      int64 count);
 
   // Returns the number of topics in the model.
-  int num_topics() const { return global_distribution_.size(); }
+  unsigned int num_topics() const { return global_distribution_.size(); }
 
   // Returns the number of words in the model (not including the global word).
   int num_words() const { return topic_distributions_.size(); }
